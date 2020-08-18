@@ -1,3 +1,18 @@
+html, body {
+  height: 100%;
+}
 
+body.home {
+  background: linear-gradient(110deg, #F0F4F8 50%, #DCEEFB 50%);
+}
+
+.cta-box {
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+.cta-box p {
+  margin-bottom: 0.5em;
+}
 
 /*# sourceMappingURL=style.css.map */
