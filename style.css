@@ -32,12 +32,11 @@ h1 {
   margin-bottom: 0.5em;
 }
 
-.form-group {
+.registration label, .login label {
+  visibility: hidden;
   margin-bottom: 0;
 }
-
-form label {
-  visibility: hidden;
+.registration .form-group, .login .form-group {
   margin-bottom: 0;
 }
 
@@ -47,6 +46,10 @@ form label {
 }
 .balance a {
   color: #003E6B;
+}
+.balance a:not([href]) {
+  color: #003E6B;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
