@@ -40,6 +40,9 @@ h1 {
   margin-bottom: 0;
 }
 
+.balance {
+  background-color: #d5d5d3;
+}
 .balance .navbar-light .navbar-nav .nav-link.active {
   color: #003E6B;
   font-weight: 700;
@@ -50,6 +53,32 @@ h1 {
 .balance a:not([href]) {
   color: #003E6B;
   cursor: pointer;
+}
+.balance a.dropdown-toggle {
+  font-weight: 700;
+  color: #000;
+}
+.balance h2 {
+  font-size: 1.5rem;
+}
+.balance .table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  background-color: #fff;
+}
+.balance .table td:not(:first-child) {
+  border-top: 1px solid #dee2e6;
+}
+
+.table th {
+  border-top: none;
+}
+
+.table thead th {
+  border-bottom: none;
 }
 
 /*# sourceMappingURL=style.css.map */

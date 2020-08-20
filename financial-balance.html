@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body class="bg-light balance">
-    <div class="container">
+<body class="balance">
+    <div class="container bg-light px-5">
         <div class="row pt-5 pb-2 border-bottom">
             <div class="col-6">
                 <div class="logo pb-4">
@@ -32,7 +32,7 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul class="navbar-nav justify-content-center w-100">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Strona główna</a>
+                                <a class="nav-link" href="#">Strona główna</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Dodaj przychód</a>
@@ -41,7 +41,7 @@
                                 <a class="nav-link" href="#">Dodaj wydatek</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Przeglądaj bilans</a>
+                                <a class="nav-link active" href="#">Przeglądaj bilans</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Ustawienia</a>
@@ -64,12 +64,12 @@
                 </nav>
             </div>
         </div>
-        <div class="row py-3">
+        <div class="row py-3 border-bottom">
             <div class="col-md-6">
                 <h1>Finansowy bilans</h1>
                 <p>Okres: <strong>bieżący miesiąc</strong></p>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-right pt-2">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Bieżący miesiąc
@@ -78,15 +78,16 @@
                         <a class="dropdown-item" href="#">Poprzedni miesiąc</a>
                         <a class="dropdown-item" href="#">Bieżący rok</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#nonStandardPeriod">Niestandardowy</a>
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-6">
+        <div class="row justify-content-center pt-4">
+            <div class="col-md-6">
+                <h2>Przychody</h2>
+
                 <table class="table">
-                    <thead>
+                    <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Kategoria</th>
@@ -116,6 +117,108 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row justify-content-center pt-4">
+            <div class="col-md-6">
+                <h2>Wydatki</h2>
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Kategoria</th>
+                        <th scope="col">Kwota</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td>Jedzenie</td>
+                        <td>540.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Mieszkanie</td>
+                        <td>125.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Transport</td>
+                        <td>65.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Telekomunikacja</td>
+                        <td>63.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>Opieka zdrowotna</td>
+                        <td>55.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>Ubranie</td>
+                        <td>52.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>Higiena</td>
+                        <td>45.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>8.</td>
+                        <td>Dzieci</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>9.</td>
+                        <td>Rozrywka</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>10.</td>
+                        <td>Wycieczka</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>11.</td>
+                        <td>Szkolenia</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>12.</td>
+                        <td>Książki</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>13.</td>
+                        <td>Oszczędności</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>14.</td>
+                        <td>Na złotą jesień, czyli emeryturę</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>15.</td>
+                        <td>Spłata długów</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>16.</td>
+                        <td>Darowizna</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    <tr>
+                        <td>17.</td>
+                        <td>Inne wydatki</td>
+                        <td>54.12 zł</td>
+                    </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
