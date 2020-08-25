@@ -1,20 +1,20 @@
 $(document).ready(function () {
 
-    let currentDate = new Date();
+    // let currentDate = new Date();
+    //
+    // let currentDay = currentDate.getDate();
+    // let currentMonth = currentDate.getMonth()+1;
+    // let currentYear = currentDate.getFullYear();
+    //
+    // if(currentDay<10)
+    //     currentDay='0'+currentDay;
+    //
+    // if(currentMonth<10)
+    //     currentMonth='0'+currentMonth;
+    //
+    // $('input#date').val(`${currentYear}-${currentMonth}-${currentDay}`);
 
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth()+1;
-    let currentYear = currentDate.getFullYear();
-
-    if(currentDay<10)
-        currentDay='0'+currentDay;
-
-    if(currentMonth<10)
-        currentMonth='0'+currentMonth;
-
-    $('input#date').val(`${currentYear}-${currentMonth}-${currentDay}`);
-
-    // Load google charts
+    // --- Load google charts ---
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
@@ -41,10 +41,11 @@ $(document).ready(function () {
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Wydatki', 'width':550, 'height':400};
+        var options = {'title':'', 'width':520, 'height':400};
 
         // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
         chart.draw(data, options);
     }
 });

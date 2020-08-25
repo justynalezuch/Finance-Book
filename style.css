@@ -43,6 +43,11 @@ h1 {
 .balance {
   background-color: #f2f6fa;
   font-size: 14px;
+  overflow-x: hidden;
+}
+.balance h1 svg {
+  position: relative;
+  top: 3px;
 }
 .balance .container {
   background: #fff;
@@ -53,15 +58,11 @@ h1 {
 .balance .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0.75rem 1rem;
 }
-.balance a {
-  color: #003E6B;
-}
 .balance a svg {
   position: relative;
-  top: 2px;
+  top: 1px;
 }
 .balance a:not([href]) {
-  color: #003E6B;
   cursor: pointer;
 }
 .balance a.dropdown-toggle {
@@ -70,6 +71,7 @@ h1 {
 }
 .balance h2 {
   font-size: 1.5rem;
+  font-weight: 400;
 }
 .balance .table {
   border-collapse: collapse;
@@ -89,9 +91,13 @@ h1 {
 }
 .balance .navbar-light .navbar-nav .nav-link.active {
   font-weight: 700;
+  color: #a77501;
 }
 .balance .navbar-light .navbar-nav .nav-link:hover {
   color: #C99A2E;
+}
+.balance p.summary {
+  font-size: 36px;
 }
 
 .table th {
