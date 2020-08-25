@@ -41,14 +41,24 @@ h1 {
 }
 
 .balance {
-  background-color: #d5d5d3;
+  background-color: #f2f6fa;
+  font-size: 14px;
 }
-.balance .navbar-light .navbar-nav .nav-link.active {
-  color: #003E6B;
-  font-weight: 700;
+.balance .container {
+  background: #fff;
+}
+.balance .menu-bg {
+  background-color: #E9ECEF;
+}
+.balance .navbar-expand-lg .navbar-nav .nav-link {
+  padding: 0.75rem 1rem;
 }
 .balance a {
   color: #003E6B;
+}
+.balance a svg {
+  position: relative;
+  top: 2px;
 }
 .balance a:not([href]) {
   color: #003E6B;
@@ -63,14 +73,25 @@ h1 {
 }
 .balance .table {
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
   background-color: #fff;
 }
 .balance .table td:not(:first-child) {
   border-top: 1px solid #dee2e6;
+}
+.balance .table tr td:nth-child(3), .balance .table tr th:nth-child(3) {
+  text-align: right;
+}
+.balance .navbar-light .navbar-nav .nav-link {
+  color: #003E6B;
+}
+.balance .navbar-light .navbar-nav .nav-link.active {
+  font-weight: 700;
+}
+.balance .navbar-light .navbar-nav .nav-link:hover {
+  color: #C99A2E;
 }
 
 .table th {
