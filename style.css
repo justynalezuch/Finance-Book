@@ -2,15 +2,39 @@ html, body {
   height: 100%;
 }
 
-body.bg {
+body {
+  font-size: 14px;
+}
+body.bg-img {
   background: url("bg.jpg") no-repeat;
   background-size: cover;
   background-position: bottom;
+}
+body.bg {
+  background-color: #f2f6fa;
+  overflow-x: hidden;
+}
+body.bg .container {
+  background: #fff;
 }
 
 h1 {
   font-size: 2rem;
   font-weight: 400;
+}
+h1 svg {
+  position: relative;
+  top: 3px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+a svg {
+  position: relative;
+  top: 1px;
 }
 
 .logo {
@@ -40,38 +64,29 @@ h1 {
   margin-bottom: 0;
 }
 
-.balance {
-  background-color: #f2f6fa;
-  font-size: 14px;
-  overflow-x: hidden;
-}
-.balance h1 svg {
-  position: relative;
-  top: 3px;
-}
-.balance .container {
-  background: #fff;
-}
-.balance .menu-bg {
+header .menu-bg {
   background-color: #E9ECEF;
 }
-.balance .navbar-expand-lg .navbar-nav .nav-link {
+header .navbar-light .navbar-nav .nav-link {
+  color: #003E6B;
+}
+header .navbar-light .navbar-nav .nav-link.active {
+  font-weight: 700;
+  color: #186FAF;
+}
+header .navbar-light .navbar-nav .nav-link:hover {
+  color: #186FAF;
+}
+header .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0.75rem 1rem;
 }
-.balance a svg {
-  position: relative;
-  top: 1px;
-}
+
 .balance a:not([href]) {
   cursor: pointer;
 }
 .balance a.dropdown-toggle {
   font-weight: 700;
   color: #000;
-}
-.balance h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
 }
 .balance .table {
   border-collapse: collapse;
@@ -86,26 +101,14 @@ h1 {
 .balance .table tr td:nth-child(3), .balance .table tr th:nth-child(3) {
   text-align: right;
 }
-.balance .navbar-light .navbar-nav .nav-link {
-  color: #003E6B;
+.balance .table th {
+  border-top: none;
 }
-.balance .navbar-light .navbar-nav .nav-link.active {
-  font-weight: 700;
-  color: #a77501;
-}
-.balance .navbar-light .navbar-nav .nav-link:hover {
-  color: #C99A2E;
+.balance .table thead th {
+  border-bottom: none;
 }
 .balance p.summary {
   font-size: 36px;
-}
-
-.table th {
-  border-top: none;
-}
-
-.table thead th {
-  border-bottom: none;
 }
 
 /*# sourceMappingURL=style.css.map */
