@@ -16,10 +16,10 @@ body.bg {
 }
 body.bg .container {
   background: #fff;
+  border-radius: 0 0 5px 5px;
 }
 
 h1 {
-  font-size: 2rem;
   font-weight: 400;
 }
 h1 svg {
@@ -72,15 +72,22 @@ header .navbar-light .navbar-nav .nav-link {
 }
 header .navbar-light .navbar-nav .nav-link.active {
   font-weight: 700;
-  color: #186FAF;
+  color: #e28422;
 }
 header .navbar-light .navbar-nav .nav-link:hover {
-  color: #186FAF;
+  color: #a7571a;
 }
 header .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0.75rem 1rem;
 }
 
+.balance h1 {
+  font-size: 2rem;
+}
+.balance h1 svg {
+  position: relative;
+  top: 3px;
+}
 .balance a:not([href]) {
   cursor: pointer;
 }
@@ -109,6 +116,10 @@ header .navbar-expand-lg .navbar-nav .nav-link {
 }
 .balance p.summary {
   font-size: 36px;
+}
+
+.add-income h1, .add-expense h1 {
+  font-size: 1.7rem;
 }
 
 /*# sourceMappingURL=style.css.map */
