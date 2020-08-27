@@ -122,4 +122,24 @@ header .navbar-expand-lg .navbar-nav .nav-link {
   font-size: 1.7rem;
 }
 
+.home .bg {
+  background: url("bg-home.jpg") no-repeat;
+  background-size: cover;
+}
+.home h1 {
+  font-size: 2rem;
+}
+.home .cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.home .logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */
