@@ -39,8 +39,16 @@
             $_SESSION['e_password'] = "Podane hasła różnią się od siebie.";
         }
 
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $secret = "6LdHU88ZAAAAAJNWOZylkJv29cy1MCJD83Enrtdb";
+        $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
 
+        $response = json_decode($check);
+
+        if ($response->success==false)
+        {
+            $all_right=false;
+            $_SESSION['e_bot']="Potwierdź, że nie jesteś botem!";
+        }
 
         if($all_right == true) {
             // Add to database
@@ -60,7 +68,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body class="bg-img">
 <div class="container h-100 registration">
@@ -147,6 +154,17 @@
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło">
                         </div>
                     </div>
+                    <div class="text-center mt-3">
+                        <div class="g-recaptcha" data-sitekey="6LdHU88ZAAAAAHkBMg2wVshOwXCvfUQfbKGkdyBl"></div>
+
+                        <?php
+                        if (isset($_SESSION['e_bot']))
+                        {
+                            echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+                            unset($_SESSION['e_bot']);
+                        }
+                        ?>
+                    </div>
 
                     <div class="text-center mt-5">
                         <button
@@ -162,17 +180,6 @@
 </div>
 <script src="jquery-3.5.1.min.js"></script>
 <script src="bootstrap/bootstrap.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LcdKc8ZAAAAAOKtadlVUB0a4xYoML6s1yq_cmTu"></script>
-<script>
-    function onClick(e) {
-        e.preventDefault();
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LcdKc8ZAAAAAOKtadlVUB0a4xYoML6s1yq_cmTu', {action: 'submit'}).then(function(token) {
-
-                console.log('fds');
-            });
-        });
-    }
-</script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>

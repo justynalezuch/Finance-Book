@@ -8,7 +8,6 @@ body {
 body.bg-img {
   background: url("bg.jpg") no-repeat;
   background-size: cover;
-  background-position: bottom;
 }
 body.bg {
   background-color: #f2f6fa;
