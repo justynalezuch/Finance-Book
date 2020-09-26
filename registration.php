@@ -50,6 +50,39 @@
             $_SESSION['e_bot']="Potwierdź, że nie jesteś botem!";
         }
 
+        require_once 'connect.php';
+        mysqli_report(MYSQLI_REPORT_STRICT);
+
+        try {
+            $connect = new mysqli($host, $db_user, $db_password, $db_name);
+            if ($connect->connect_errno!=0) {
+                throw new Exception(mysqli_connect_errno());
+            }
+            else {
+                // Is the email already reserved?
+                $result = $connect->query("SELECT id FROM users WHERE email='$email'");
+                if(!$result) throw new Exception($connect->error);
+                $how_many_emails = $result->num_rows;
+                if($how_many_emails>0) {
+                    $all_right = false;
+                    $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail!";
+                }
+
+                //Is the nickname already reserved?
+                $result = $connect->query("SELECT id FROM users WHERE username='$username'");
+                if(!$result) throw new Exception($connect->error);
+                $how_many_usernames = $result->num_rows;
+                if($how_many_usernames>0) {
+                    $all_right = false;
+                    $_SESSION['e_username'] = "Istnieje już użytkownik z taką nazwą.";
+                }
+
+            }
+        } catch (Exception $e) {
+            echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
+            echo '<br />Informacja developerska: '.$e;
+        }
+
         if($all_right == true) {
             // Add to database
             echo 'udana waliacja'; exit();
