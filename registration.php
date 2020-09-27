@@ -38,6 +38,7 @@
             $all_right = false;
             $_SESSION['e_password'] = "Podane hasła różnią się od siebie.";
         }
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         $secret = "6LdHU88ZAAAAAJNWOZylkJv29cy1MCJD83Enrtdb";
         $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
@@ -76,16 +77,20 @@
                     $all_right = false;
                     $_SESSION['e_username'] = "Istnieje już użytkownik z taką nazwą.";
                 }
-
             }
         } catch (Exception $e) {
-            echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
-            echo '<br />Informacja developerska: '.$e;
+            echo '<div class="error">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</div>';
+            echo 'Informacja developerska: '.$e;
         }
 
         if($all_right == true) {
             // Add to database
-            echo 'udana waliacja'; exit();
+            if($connect->query("INSERT INTO users VALUES (null, '$username', '$password_hash', '$email')")){
+
+                $_SESSION['successful_registration'];
+            } else {
+                throw new Exception($connect->error);
+            }
         }
     }
 ?>
