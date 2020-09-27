@@ -138,6 +138,9 @@ header .navbar-expand-lg .navbar-nav .nav-link {
   top: 10px;
   right: 20px;
 }
+.home.welcome h1 {
+  font-size: 1.5rem;
+}
 
 .menu img {
   object-fit: contain;

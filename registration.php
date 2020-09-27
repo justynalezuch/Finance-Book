@@ -86,8 +86,8 @@
         if($all_right == true) {
             // Add to database
             if($connect->query("INSERT INTO users VALUES (null, '$username', '$password_hash', '$email')")){
-
-                $_SESSION['successful_registration'];
+                $_SESSION['successful_registration'] = true;
+                header('Location: welcome.php');
             } else {
                 throw new Exception($connect->error);
             }
