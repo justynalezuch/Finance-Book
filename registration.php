@@ -51,6 +51,12 @@
             $_SESSION['e_bot']="Potwierdź, że nie jesteś botem!";
         }
 
+        // Remember inserted data
+        $_SESSION['fr_username'] = $username;
+        $_SESSION['fr_email'] = $email;
+        $_SESSION['fr_password'] = $password;
+        $_SESSION['fr_confirm_password'] = $confirm_password;
+
         require_once 'connect.php';
         mysqli_report(MYSQLI_REPORT_STRICT);
 
@@ -66,7 +72,7 @@
                 $how_many_emails = $result->num_rows;
                 if($how_many_emails>0) {
                     $all_right = false;
-                    $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail!";
+                    $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail.";
                 }
 
                 //Is the nickname already reserved?
@@ -82,6 +88,7 @@
             echo '<div class="error">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</div>';
             echo 'Informacja developerska: '.$e;
         }
+
 
         if($all_right == true) {
             // Add to database
@@ -130,7 +137,13 @@
                                     </svg>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Twoje imię">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Twoje imię" value="<?php
+                                if(isset($_SESSION['fr_username']))
+                                {
+                                    echo $_SESSION['fr_username'];
+                                    unset($_SESSION['fr_username']);
+                                }
+                            ?>">
                         </div>
                         <?php
                             if(isset($_SESSION['e_username'])) {
@@ -149,7 +162,13 @@
                                     </svg>
                                 </div>
                             </div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Wprowadź adres e-mail">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Wprowadź adres e-mail" value="<?php
+                            if(isset($_SESSION['fr_email']))
+                            {
+                                echo $_SESSION['fr_email'];
+                                unset($_SESSION['fr_email']);
+                            }
+                            ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['e_email'])) {
@@ -169,7 +188,13 @@
                                     </svg>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Podaj hasło">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Podaj hasło" value="<?php
+                            if(isset($_SESSION['fr_password']))
+                            {
+                                echo $_SESSION['fr_password'];
+                                unset($_SESSION['fr_password']);
+                            }
+                            ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['e_password'])) {
@@ -189,7 +214,13 @@
                                     </svg>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło" value="<?php
+                            if(isset($_SESSION['fr_confirm_password']))
+                            {
+                                echo $_SESSION['fr_confirm_password'];
+                                unset($_SESSION['fr_confirm_password']);
+                            }
+                            ?>">
                         </div>
                     </div>
                     <div class="text-center mt-3">
