@@ -69,6 +69,7 @@
                 // Is the email already reserved?
                 $result = $connect->query("SELECT id FROM users WHERE email='$email'");
                 if(!$result) throw new Exception($connect->error);
+
                 $how_many_emails = $result->num_rows;
                 if($how_many_emails>0) {
                     $all_right = false;
@@ -83,6 +84,8 @@
                     $all_right = false;
                     $_SESSION['e_username'] = "Istnieje już użytkownik z taką nazwą.";
                 }
+
+                $connect->close();
             }
         } catch (Exception $e) {
             echo '<div class="error">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</div>';
