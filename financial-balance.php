@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['logged'])) {
+        header('Location: home.php');
+        exit();
+    }
+?>
 <!doctype html>
 <html lang="pl">
 <head>
@@ -44,7 +51,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="add-income.html">
+                                     <a class="nav-link" href="add-income.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                              <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
@@ -54,7 +61,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="add-expense.html">
+                                     <a class="nav-link" href="add-expense.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                              <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z"/>
@@ -64,7 +71,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link active" href="financial-balance.html">
+                                     <a class="nav-link active" href="financial-balance.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                                              <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>

@@ -129,7 +129,7 @@
                 <h1>Rejestracja</h1>
                 <form method="post">
                     <div class="form-group">
-                        <label for="name">Podaj imię:</label>
+                        <label for="name">Podaj nazwę użytkownika:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -140,7 +140,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Twoje imię" value="<?php
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Wprowadź nazwę użytkownika" value="<?php
                                 if(isset($_SESSION['fr_username']))
                                 {
                                     echo $_SESSION['fr_username'];
