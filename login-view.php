@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!doctype html>
 <html lang="pl">
 <head>
@@ -50,6 +54,12 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Podaj hasło">
                         </div>
                     </div>
+                    <?php
+                    if(isset($_SESSION['e_login'])) {
+                        echo '<div class="error">' . $_SESSION['e_login'] . '</div>';
+                        unset($_SESSION['e_login']);
+                    }
+                    ?>
                     <div class="text-center mt-5">
                         <button type="submit" class="btn btn-primary">Zaloguj się</button>
                     </div>
