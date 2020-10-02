@@ -42,7 +42,7 @@ if(isset($_SESSION['logged']) && $_SESSION['logged'] == true ) {
                 <div class="row justify-content-center">
                     <div class="col">
                         <p class="mb-1">Masz już konto?</p>
-                        <a href="login.html" class="btn btn-sm btn-primary">Zaloguj się</a>
+                        <a href="login-view.php" class="btn btn-sm btn-primary">Zaloguj się</a>
                     </div>
                     <div class="col">
                         <p class="mb-1">Nie masz konta?</p>

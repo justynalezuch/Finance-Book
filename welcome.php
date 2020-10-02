@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['successful_registration'])) {
-        header('Location: home.html');
+        header('Location: home.php');
     } else {
         unset($_SESSION['successful_registration']);
     }
@@ -34,7 +34,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col">
-                        <a href="login.html" class="btn btn-primary">Zaloguj się</a>
+                        <a href="login-view.php" class="btn btn-primary">Zaloguj się</a>
                     </div>
                 </div>
             </div>

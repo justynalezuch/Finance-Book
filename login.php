@@ -2,7 +2,7 @@
     session_start();
 
     if( !isset($_POST['email']) || !isset($_POST['password']) ) {
-        header('Location: home.html');
+        header('Location: home.php');
         exit();
     }
 
