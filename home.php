@@ -46,7 +46,7 @@
                     </div>
                     <div class="col">
                         <p class="mb-1">Nie masz konta?</p>
-                        <a href="registration.php" class="btn btn-sm btn-outline-primary">Zarejestruj się</a>
+                        <a href="registration-view.php" class="btn btn-sm btn-outline-primary">Zarejestruj się</a>
                     </div>
                 </div>
             </div>
