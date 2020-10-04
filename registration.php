@@ -57,7 +57,7 @@
         $_SESSION['fr_password'] = $password;
         $_SESSION['fr_confirm_password'] = $confirm_password;
 
-        require_once 'connect.php';
+//        require_once 'connect.php';
         mysqli_report(MYSQLI_REPORT_STRICT);
 
         try {
