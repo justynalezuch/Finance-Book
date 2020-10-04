@@ -4,10 +4,11 @@
     if(isset($_POST['email']))  {
         $all_right = true;
 
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+        $username = filter_input(INPUT_POST, 'username');
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+
+        $password = filter_input(INPUT_POST, 'password');
+        $confirm_password = filter_input(INPUT_POST, 'confirm_password');
 
         if(strlen($username)<3 || strlen($username)>50) {
             $all_right = false;
@@ -17,9 +18,8 @@
             $all_right = false;
             $_SESSION['e_username'] = "Nazwa użytkownika może składać się tylko z liter i cyfr (bez polskich znaków)";
         }
-
-        $sanitazedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if( !filter_var($sanitazedEmail, FILTER_SANITIZE_EMAIL) || $email != $sanitazedEmail) {
+        
+        if (empty($email)) {
             $all_right = false;
             $_SESSION['e_email'] = "Podaj poprawny adres email.";
         }
@@ -59,38 +59,38 @@
 
 //        require_once 'connect.php';
         mysqli_report(MYSQLI_REPORT_STRICT);
-
-        try {
-            $connect = new mysqli($host, $db_user, $db_password, $db_name);
-            if ($connect->connect_errno!=0) {
-                throw new Exception(mysqli_connect_errno());
-            }
-            else {
-                // Is the email already reserved?
-                $result = $connect->query("SELECT id FROM users WHERE email='$email'");
-                if(!$result) throw new Exception($connect->error);
-
-                $how_many_emails = $result->num_rows;
-                if($how_many_emails>0) {
-                    $all_right = false;
-                    $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail.";
-                }
-
-                //Is the nickname already reserved?
-                $result = $connect->query("SELECT id FROM users WHERE username='$username'");
-                if(!$result) throw new Exception($connect->error);
-                $how_many_usernames = $result->num_rows;
-                if($how_many_usernames>0) {
-                    $all_right = false;
-                    $_SESSION['e_username'] = "Istnieje już użytkownik z taką nazwą.";
-                }
-
-                $connect->close();
-            }
-        } catch (Exception $e) {
-            echo '<div class="error">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</div>';
-            echo 'Informacja developerska: '.$e;
-        }
+//
+//        try {
+//            $connect = new mysqli($host, $db_user, $db_password, $db_name);
+//            if ($connect->connect_errno!=0) {
+//                throw new Exception(mysqli_connect_errno());
+//            }
+//            else {
+//                // Is the email already reserved?
+//                $result = $connect->query("SELECT id FROM users WHERE email='$email'");
+//                if(!$result) throw new Exception($connect->error);
+//
+//                $how_many_emails = $result->num_rows;
+//                if($how_many_emails>0) {
+//                    $all_right = false;
+//                    $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail.";
+//                }
+//
+//                //Is the nickname already reserved?
+//                $result = $connect->query("SELECT id FROM users WHERE username='$username'");
+//                if(!$result) throw new Exception($connect->error);
+//                $how_many_usernames = $result->num_rows;
+//                if($how_many_usernames>0) {
+//                    $all_right = false;
+//                    $_SESSION['e_username'] = "Istnieje już użytkownik z taką nazwą.";
+//                }
+//
+//                $connect->close();
+//            }
+//        } catch (Exception $e) {
+//            echo '<div class="error">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</div>';
+//            echo 'Informacja developerska: '.$e;
+//        }
 
 
         if($all_right == true) {
