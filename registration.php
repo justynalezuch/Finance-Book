@@ -13,8 +13,8 @@ if(isset($_POST['email']))  {
         $all_right = false;
         $_SESSION['e_username'] = "Nazwa użytkownika powinna być nie krótsza niż 3 znaki i nie dłuższa niż 50 znaków.";
         header('Location: registration-view.php');
-
     }
+
     if(ctype_alnum($username)==false) {
         $all_right = false;
         $_SESSION['e_username'] = "Nazwa użytkownika może składać się tylko z liter i cyfr (bez polskich znaków)";

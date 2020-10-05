@@ -10,7 +10,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Moje finanse | Dodaj przychód</title>
+    <title>Moje finanse | Dodaj wydatek</title>
     <meta name="description" content="Aplikacja Moje Finanse - codzienny przegląd Twoich wydatków">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -52,7 +52,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="add-income.php">
+                                    <a class="nav-link" href="add-income-view.php">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                             <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
@@ -62,7 +62,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="add-expense.php">
+                                    <a class="nav-link active" href="add-expense-view.php">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                             <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z"/>
@@ -89,7 +89,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="logout.php">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                             <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
@@ -99,78 +99,85 @@
                                     </a>
                                 </li>
                             </ul>
-
-                            <!--                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
-                            <!--                        <li class="nav-item active">-->
-                            <!--                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-                            <!--                        </li>-->
-                            <!--                        <li class="nav-item">-->
-                            <!--                            <a class="nav-link" href="#">Link</a>-->
-                            <!--                        </li>-->
-                            <!--                  -->
-                            <!--                    </ul>-->
                         </div>
                     </nav>
                 </div>
             </div>
         </header>
-        <main class="add-income pb-5">
+        <main class="add-expense pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
                     <h1 class="py-md-5 py-4 text-center">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
-                            <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
-                            <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"/>
+                            <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z"/>
+                            <path fill-rule="evenodd" d="M10 9.854a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v3.5h-3.5a.5.5 0 0 0-.5.5z"/>
                         </svg>
-                        Dodaj przychód
+                        Dodaj wydatek
                     </h1>
-                    <form>
+                    <form method="post" action="add-expense.php">
                         <div class="form-group row">
                             <label for="amount" class="col-sm-2 col-form-label">Kwota</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="amount" placeholder="Wprowadź kwotę np. 12.45" required>
+                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Wprowadź kwotę np. 12.45" required value="<?php
+                                if(isset($_SESSION['fr_amount']))
+                                {
+                                    echo $_SESSION['fr_amount'];
+                                    unset($_SESSION['fr_amount']);
+                                }
+                                ?>">
                             </div>
                         </div>
+                        <?php
+                        if(isset($_SESSION['e_amount'])) {
+                            echo '<div class="error">' . $_SESSION['e_amount'] . '</div>';
+                            unset($_SESSION['e_amount']);
+                        }
+                        ?>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Data</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="date" required>
+                                <input type="date" class="form-control" id="date" name="date" required>
                             </div>
                         </div>
-                        <fieldset class="form-group row">
-                            <legend class="col-form-label col-sm-2">Kategoria</legend>
+                        <div class="form-group row">
+                            <label for="paymentMethod" class="col-sm-2 col-form-label">Sposób płatności</label>
                             <div class="col-sm-10">
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="salary" value="salary" checked>
-                                        <label class="form-check-label" for="salary">
-                                            Wynagrodzenie
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="bankInterest" value="bank-interest">
-                                        <label class="form-check-label" for="bankInterest">
-                                            Odsetki bankowe
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="allegroSales" value="allegro-sales">
-                                        <label class="form-check-label" for="allegroSales">
-                                            Sprzedaź na allegro
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="others" value="option3">
-                                        <label class="form-check-label" for="others">
-                                            Inne
-                                        </label>
-                                    </div>
+                                <select class="form-control" id="paymentMethod" name="payment-method">
+                                    <option value="cash" selected>Gotówka</option>
+                                    <option value="debit-card">Karta debetowa</option>
+                                    <option value="credit-[card">Karta kredytowa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="category" name="category">
+                                    <option value="food" selected>Jedzenie</option>
+                                    <option value="flat">Mieszkanie</option>
+                                    <option value="transport">Transport</option>
+                                    <option value="telecommunications">Telekomunikacja</option>
+                                    <option value="healthcare">Opieka zdrowotna</option>
+                                    <option value="cloth">Ubranie</option>
+                                    <option value="hygiene">Higiena</option>
+                                    <option value="children">Dzieci</option>
+                                    <option value="entertainment">Rozrywka</option>
+                                    <option value="trip">Wycieczka</option>
+                                    <option value="training">Szkolenia</option>
+                                    <option value="books">Książki</option>
+                                    <option value="savings">Oszczędności</option>
+                                    <option value="for retirement">Na złotą jesień, czyli emeryturę</option>
+                                    <option value="debt-repayment">Spłata długów</option>
+                                    <option value="donation">Darowizna</option>
+                                    <option value="other">Inne wydatki</option>
+                                </select>
+                            </div>
+                        </div>
 
-                                </div>
-                        </fieldset>
                         <div class="form-group">
                             <label for="comment">Komentarz</label>
-                            <textarea class="form-control" id="comment" rows="4" placeholder="Dodaj komentarz (opcjonalnie)"></textarea>
+                            <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Dodaj komentarz (opcjonalnie)"></textarea>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">

@@ -19,7 +19,7 @@
         if ($user && password_verify($password, $user['password'])) {
 
             $_SESSION['logged'] = true;
-            $_SESSION['id'] = $user['id'];
+            $_SESSION['logged_user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
 

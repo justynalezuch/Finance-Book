@@ -5,11 +5,12 @@
         exit();
     }
 ?>
+
 <!doctype html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Moje finanse | Menu</title>
+    <title>Moje finanse | Dodaj przychód</title>
     <meta name="description" content="Aplikacja Moje Finanse - codzienny przegląd Twoich wydatków">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -20,7 +21,7 @@
 
 </head>
 <body class="bg">
-    <div class="container h-100">
+    <div class="container mb-5">
         <header>
             <div class="row p-3">
                 <div class="col-6">
@@ -30,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-6 p-2 text-right">
-                    Zalogowano jako: <strong><?php echo $_SESSION['username']?></strong>
+                    Zalogowano jako: <strong>Jakub</strong>
                 </div>
             </div>
             <div class="row">
@@ -42,7 +43,7 @@
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                             <ul class="navbar-nav justify-content-center w-100">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="menu.php">
+                                    <a class="nav-link" href="home.php">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                                             <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
@@ -51,7 +52,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="add-income-view.php">
+                                    <a class="nav-link active" href="add-income-view.php">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                             <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
@@ -113,17 +114,72 @@
                 </div>
             </div>
         </header>
-        <main class="menu">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col text-center">
-                        <h1 class="pt-5">Witaj w aplikacji Moje Finanse!</h1>
-                        <blockquote class="blockquote text-secondary my-4">
-                            <p class="mb-0">Zrobić budżet to wskazać swoim pieniądzom, dokąd mają iść, <br>zamiast się zastanawiać, gdzie się rozeszły.</p>
-                            <footer class="blockquote-footer"><cite title="Source Title">John C. Maxwell</cite></footer>
-                        </blockquote>
-                        <img src="money.jpg" alt="">
-                    </div>
+        <main class="add-income pb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6">
+                    <h1 class="py-md-5 py-4 text-center">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+                            <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
+                            <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        Dodaj przychód
+                    </h1>
+                    <form>
+                        <div class="form-group row">
+                            <label for="amount" class="col-sm-2 col-form-label">Kwota</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="amount" placeholder="Wprowadź kwotę np. 12.45" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-2 col-form-label">Data</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="date" required>
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <legend class="col-form-label">Kategoria</legend>
+                            <div class="pt-1">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="category" id="salary" value="salary" checked>
+                                        <label class="form-check-label" for="salary">
+                                            Wynagrodzenie
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="category" id="bankInterest" value="bank-interest">
+                                        <label class="form-check-label" for="bankInterest">
+                                            Odsetki bankowe
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="category" id="allegroSales" value="allegro-sales">
+                                        <label class="form-check-label" for="allegroSales">
+                                            Sprzedaź na allegro
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="category" id="others" value="option3">
+                                        <label class="form-check-label" for="others">
+                                            Inne
+                                        </label>
+                                    </div>
+
+                                </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <label for="comment">Komentarz</label>
+                            <textarea class="form-control" id="comment" rows="4" placeholder="Dodaj komentarz (opcjonalnie)"></textarea>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 text-right">
+                                <a class="btn btn-outline-secondary">Anuluj</a>
+                                <button type="submit" class="btn btn-primary">Dodaj</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </main>

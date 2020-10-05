@@ -51,7 +51,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="add-income.php">
+                                     <a class="nav-link" href="add-income-view.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                              <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
@@ -61,7 +61,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="add-expense.php">
+                                     <a class="nav-link" href="add-expense-view.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
                                              <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z"/>
@@ -88,7 +88,7 @@
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="#">
+                                     <a class="nav-link" href="logout.php">
                                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
