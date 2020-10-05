@@ -100,6 +100,20 @@ if(isset($_POST['email']))  {
 
         if($query->execute()) {
             $_SESSION['successful_registration'] = true;
+
+            $lastID = $db->lastInsertId();
+
+            $sql = "INSERT INTO payment_methods_assigned_to_users (user_id, name) SELECT :user_id, name FROM payment_methods_default;
+                    INSERT INTO expenses_category_assigned_to_users (user_id, name) SELECT :user_id, name FROM expenses_category_default;
+                    INSERT INTO incomes_category_assigned_to_users (user_id, name) SELECT :user_id, name FROM incomes_category_default;";
+
+            $query = $db->prepare($sql);
+            $query->bindValue(':user_id', $lastID, PDO::PARAM_INT);
+            $query->execute();
+
+
+
+
             header('Location: welcome.php');
         }
 
