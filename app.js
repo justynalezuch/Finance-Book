@@ -1,18 +1,23 @@
 $(document).ready(function () {
 
-    let currentDate = new Date();
+    if(document.getElementById('date').value) {
+        $('input#date').val(document.getElementById('date').value);
+    }
+    else {
 
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth()+1;
-    let currentYear = currentDate.getFullYear();
+        let currentDate = new Date();
+        let currentDay = currentDate.getDate();
+        let currentMonth = currentDate.getMonth() + 1;
+        let currentYear = currentDate.getFullYear();
 
-    if(currentDay<10)
-        currentDay='0'+currentDay;
+        if (currentDay < 10)
+            currentDay = '0' + currentDay;
 
-    if(currentMonth<10)
-        currentMonth='0'+currentMonth;
+        if (currentMonth < 10)
+            currentMonth = '0' + currentMonth;
 
-    $('input#date').val(`${currentYear}-${currentMonth}-${currentDay}`);
+        $('input#date').val(`${currentYear}-${currentMonth}-${currentDay}`);
+    }
 
     if (typeof google !== 'undefined') {
         // --- Load google charts ---

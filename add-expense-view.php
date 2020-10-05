@@ -137,9 +137,21 @@
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Data</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="date" name="date" required>
+                                <input type="date" class="form-control" id="date" name="date" required value="<?php
+                                if(isset($_SESSION['fr_date']))
+                                {
+                                    echo $_SESSION['fr_date'];
+                                    unset($_SESSION['fr_date']);
+                                }
+                                ?>">
                             </div>
                         </div>
+                        <?php
+                        if(isset($_SESSION['e_date'])) {
+                            echo '<div class="error">' . $_SESSION['e_date'] . '</div>';
+                            unset($_SESSION['e_date']);
+                        }
+                        ?>
                         <div class="form-group row">
                             <label for="paymentMethod" class="col-sm-2 col-form-label">Sposób płatności</label>
                             <div class="col-sm-10">
