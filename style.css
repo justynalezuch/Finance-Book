@@ -158,4 +158,9 @@ blockquote p {
   margin-top: 5px;
 }
 
+.add-expense .error {
+  width: 100%;
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */

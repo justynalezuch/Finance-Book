@@ -22,11 +22,9 @@
         // Remember inserted data
         $_SESSION['fr_amount'] = $amount;
         $_SESSION['fr_date'] = $date;
-        $_SESSION['$fr_paymentMethod'] = $paymentMethod;
-        $_SESSION['$fr_category'] = $category;
-        $_SESSION['$fr_comment'] = $comment;
-
-        echo $date;
+        $_SESSION['fr_paymentMethod'] = $paymentMethod;
+        $_SESSION['fr_category'] = $category;
+        $_SESSION['fr_comment'] = $comment;
 
         if(!preg_match("/^\d{1,8}(\.\d{0,2})?$/" , $amount)) {
             $all_right = false;
@@ -40,10 +38,17 @@
             header('Location: add-expense-view.php');
         }
 
+        if(empty($paymentMethod)) {
+            $all_right = false;
+            $_SESSION['e_paymentMethod'] = "Podaj metodę płatności.";
+            header('Location: add-expense-view.php');
+        }
 
-
-
-
+        if(empty($category)) {
+            $all_right = false;
+            $_SESSION['e_category'] = "Podaj kategorię wydatku.";
+            header('Location: add-expense-view.php');
+        }
     }
 
 

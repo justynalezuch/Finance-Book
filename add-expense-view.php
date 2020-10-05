@@ -155,16 +155,31 @@
                         <div class="form-group row">
                             <label for="paymentMethod" class="col-sm-2 col-form-label">Sposób płatności</label>
                             <div class="col-sm-10">
+<!--                                todo: DISPLAY FROM DATABASE-->
                                 <select class="form-control" id="paymentMethod" name="payment-method">
                                     <option value="cash" selected>Gotówka</option>
                                     <option value="debit-card">Karta debetowa</option>
-                                    <option value="credit-[card">Karta kredytowa</option>
+                                    <option value="credit-card">Karta kredytowa</option>
                                 </select>
                             </div>
+                            <input type="hidden" id="fr_paymentMethod" value="<?php
+                            if(isset($_SESSION['fr_paymentMethod']))
+                            {
+                                echo $_SESSION['fr_paymentMethod'];
+                                unset($_SESSION['fr_paymentMethod']);
+                            }
+                            ?>">
+                            <?php
+                            if(isset($_SESSION['e_paymentMethod'])) {
+                                echo '<div class="error">' . $_SESSION['e_paymentMethod'] . '</div>';
+                                unset($_SESSION['e_paymentMethod']);
+                            }
+                            ?>
                         </div>
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
                             <div class="col-sm-10">
+<!--                                todo: display from database-->
                                 <select class="form-control" id="category" name="category">
                                     <option value="food" selected>Jedzenie</option>
                                     <option value="flat">Mieszkanie</option>
@@ -185,6 +200,19 @@
                                     <option value="other">Inne wydatki</option>
                                 </select>
                             </div>
+                            <input type="hidden" id="fr_category" value="<?php
+                            if(isset($_SESSION['fr_category']))
+                            {
+                                echo $_SESSION['fr_category'];
+                                unset($_SESSION['fr_category']);
+                            }
+                            ?>">
+                            <?php
+                            if(isset($_SESSION['e_category'])) {
+                                echo '<div class="error">' . $_SESSION['e_category'] . '</div>';
+                                unset($_SESSION['e_category']);
+                            }
+                            ?>
                         </div>
 
                         <div class="form-group">

@@ -1,8 +1,19 @@
 $(document).ready(function () {
 
+    //Add expense - remember data in select
+    if(document.getElementById('fr_paymentMethod').value) {
+        document.getElementById('paymentMethod').value = document.getElementById('fr_paymentMethod').value;
+    }
+
+    if(document.getElementById('fr_category').value) {
+        document.getElementById('category').value = document.getElementById('fr_category').value;
+    }
+
+    // Add expense, add income - if isset date - remember it
     if(document.getElementById('date').value) {
         $('input#date').val(document.getElementById('date').value);
     }
+
     else {
 
         let currentDate = new Date();
