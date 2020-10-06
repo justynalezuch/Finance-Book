@@ -6,33 +6,19 @@
     }
 
     $loggedUserId = $_SESSION['logged_user_id'];
-
-//    require_once 'translations.php';
     require_once 'connect-database.php';
 
-    $query = $db->prepare('SELECT name FROM payment_methods_assigned_to_users WHERE user_id=:logged_user_id');
+    $query = $db->prepare('SELECT id, name FROM payment_methods_assigned_to_users WHERE user_id=:logged_user_id');
     $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
     $query->execute();
 
     $paymentMethods = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = $db->prepare('SELECT name FROM expenses_category_assigned_to_users WHERE user_id=:logged_user_id');
+    $query = $db->prepare('SELECT id, name FROM expenses_category_assigned_to_users WHERE user_id=:logged_user_id');
     $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
     $query->execute();
 
     $expensesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
-
-//    $query = $db->prepare('SELECT name FROM incomes_category_assigned_to_users WHERE user_id=:logged_user_id');
-//    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
-//    $query->execute();
-//
-//    $incomesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
-
-
-    function createSlugFromString($urlString){
-        $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $urlString);
-        return strtolower($slug);
-    }
 
 ?>
 
@@ -137,6 +123,18 @@
         <main class="add-expense pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
+                    <?php
+                    if(isset($_SESSION['successfully_adding_an_expense'])) {
+                        echo '<div class="alert alert-success mt-4 mb-0 text-center" role="alert">' . $_SESSION['successfully_adding_an_expense'] . '</div>';
+                        unset($_SESSION['successfully_adding_an_expense']);
+                    }
+                    ?>
+                    <?php
+                    if(isset($_SESSION['error_of_adding_expense'])) {
+                        echo '<div class="alert alert-danger mt-4 mb-0 text-center" role="alert">' . $_SESSION['error_of_adding_expense'] . '</div>';
+                        unset($_SESSION['error_of_adding_expense']);
+                    }
+                    ?>
                     <h1 class="py-md-5 py-4 text-center">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
@@ -187,7 +185,7 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="paymentMethod" name="payment-method">
                                     <?php foreach ($paymentMethods as $method)
-                                        echo '<option value="'.createSlugFromString($method['name']).'">'.$method['name'].'</option>';
+                                        echo '<option value="'.$method['id'].'">'.$method['name'].'</option>';
                                     ?>
                                 </select>
                             </div>
@@ -209,8 +207,8 @@
                             <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="category" name="category">
-                                    <?php foreach ($expensesCategories as $key => $method)
-                                        echo '<option value="'.createSlugFromString($method['name']).'">'.$method['name'].'</option>';
+                                    <?php foreach ($expensesCategories as $method)
+                                        echo '<option value="'.($method['id']).'">'.$method['name'].'</option>';
                                     ?>
                                 </select>
                             </div>

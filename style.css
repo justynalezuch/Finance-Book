@@ -160,7 +160,8 @@ blockquote p {
 
 .add-expense .error {
   width: 100%;
-  text-align: center;
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -111,9 +111,6 @@ if(isset($_POST['email']))  {
             $query->bindValue(':user_id', $lastID, PDO::PARAM_INT);
             $query->execute();
 
-
-
-
             header('Location: welcome.php');
         }
 

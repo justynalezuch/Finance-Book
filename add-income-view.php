@@ -4,6 +4,12 @@
         header('Location: home.php');
         exit();
     }
+
+//    $query = $db->prepare('SELECT name FROM incomes_category_assigned_to_users WHERE user_id=:logged_user_id');
+//    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
+//    $query->execute();
+//
+//    $incomesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
