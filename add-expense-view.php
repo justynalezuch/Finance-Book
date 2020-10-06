@@ -1,9 +1,39 @@
 <?php
     session_start();
-    if(!isset($_SESSION['logged'])) {
+    if(!isset($_SESSION['logged']) || !isset($_SESSION['logged_user_id'])) {
         header('Location: home.php');
         exit();
     }
+
+    $loggedUserId = $_SESSION['logged_user_id'];
+
+//    require_once 'translations.php';
+    require_once 'connect-database.php';
+
+    $query = $db->prepare('SELECT name FROM payment_methods_assigned_to_users WHERE user_id=:logged_user_id');
+    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
+    $query->execute();
+
+    $paymentMethods = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = $db->prepare('SELECT name FROM expenses_category_assigned_to_users WHERE user_id=:logged_user_id');
+    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
+    $query->execute();
+
+    $expensesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+
+//    $query = $db->prepare('SELECT name FROM incomes_category_assigned_to_users WHERE user_id=:logged_user_id');
+//    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
+//    $query->execute();
+//
+//    $incomesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+    function createSlugFromString($urlString){
+        $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $urlString);
+        return strtolower($slug);
+    }
+
 ?>
 
 <!doctype html>
@@ -155,11 +185,10 @@
                         <div class="form-group row">
                             <label for="paymentMethod" class="col-sm-2 col-form-label">Sposób płatności</label>
                             <div class="col-sm-10">
-<!--                                todo: DISPLAY FROM DATABASE-->
                                 <select class="form-control" id="paymentMethod" name="payment-method">
-                                    <option value="cash" selected>Gotówka</option>
-                                    <option value="debit-card">Karta debetowa</option>
-                                    <option value="credit-card">Karta kredytowa</option>
+                                    <?php foreach ($paymentMethods as $method)
+                                        echo '<option value="'.createSlugFromString($method['name']).'">'.$method['name'].'</option>';
+                                    ?>
                                 </select>
                             </div>
                             <input type="hidden" id="fr_paymentMethod" value="<?php
@@ -179,25 +208,10 @@
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
                             <div class="col-sm-10">
-<!--                                todo: display from database-->
                                 <select class="form-control" id="category" name="category">
-                                    <option value="food" selected>Jedzenie</option>
-                                    <option value="flat">Mieszkanie</option>
-                                    <option value="transport">Transport</option>
-                                    <option value="telecommunications">Telekomunikacja</option>
-                                    <option value="healthcare">Opieka zdrowotna</option>
-                                    <option value="cloth">Ubranie</option>
-                                    <option value="hygiene">Higiena</option>
-                                    <option value="children">Dzieci</option>
-                                    <option value="entertainment">Rozrywka</option>
-                                    <option value="trip">Wycieczka</option>
-                                    <option value="training">Szkolenia</option>
-                                    <option value="books">Książki</option>
-                                    <option value="savings">Oszczędności</option>
-                                    <option value="for retirement">Na złotą jesień, czyli emeryturę</option>
-                                    <option value="debt-repayment">Spłata długów</option>
-                                    <option value="donation">Darowizna</option>
-                                    <option value="other">Inne wydatki</option>
+                                    <?php foreach ($expensesCategories as $key => $method)
+                                        echo '<option value="'.createSlugFromString($method['name']).'">'.$method['name'].'</option>';
+                                    ?>
                                 </select>
                             </div>
                             <input type="hidden" id="fr_category" value="<?php

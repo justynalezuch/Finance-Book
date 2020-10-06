@@ -6,8 +6,6 @@
         exit();
     }
 
-
-
     if(isset($_POST['amount']) && $_SESSION['logged_user_id']){
 
         $all_right = true;
@@ -49,6 +47,7 @@
             $_SESSION['e_category'] = "Podaj kategorię wydatku.";
             header('Location: add-expense-view.php');
         }
+
     }
 
 
