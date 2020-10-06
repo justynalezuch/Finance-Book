@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="col-6 p-2 text-right">
-                    Zalogowano jako: <strong>Jakub</strong>
+                    Zalogowano jako: <strong><?php echo $_SESSION['username']?></strong>
                 </div>
             </div>
             <div class="row">
@@ -147,47 +147,71 @@
                         <div class="form-group row">
                             <label for="amount" class="col-sm-2 col-form-label">Kwota</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Wprowadź kwotę np. 12.45" required value="<?php
-                                if(isset($_SESSION['fr_amount']))
-                                {
-                                    echo $_SESSION['fr_amount'];
-                                    unset($_SESSION['fr_amount']);
+                                <input type="number"
+                                       class="form-control<?php if(isset($_SESSION['e_amount']))echo ' is-invalid'?>"
+                                       id="amount"
+                                       name="amount"
+                                       step="0.01"
+                                       placeholder="Wprowadź kwotę np. 12.45"
+                                       required
+                                       aria-describedby="validationServer01"
+                                       value="<?php
+                                        if(isset($_SESSION['fr_amount']))
+                                        {
+                                            echo $_SESSION['fr_amount'];
+                                            unset($_SESSION['fr_amount']);
+                                        }
+                                        ?>">
+                                <?php
+                                if(isset($_SESSION['e_amount'])) {
+                                    echo '<div id="validationServer01" class="invalid-feedback">' . $_SESSION['e_amount'] . '</div>';
+                                    unset($_SESSION['e_amount']);
                                 }
-                                ?>">
+                                ?>
                             </div>
                         </div>
-                        <?php
-                        if(isset($_SESSION['e_amount'])) {
-                            echo '<div class="error">' . $_SESSION['e_amount'] . '</div>';
-                            unset($_SESSION['e_amount']);
-                        }
-                        ?>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Data</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="date" name="date" required value="<?php
-                                if(isset($_SESSION['fr_date']))
-                                {
-                                    echo $_SESSION['fr_date'];
-                                    unset($_SESSION['fr_date']);
+                                <input type="date"
+                                       class="form-control<?php if(isset($_SESSION['e_date']))echo ' is-invalid'?>"
+                                       id="date"
+                                       name="date"
+                                       required
+                                       aria-describedby="validationServer02"
+                                       value="<?php
+                                        if(isset($_SESSION['fr_date']))
+                                        {
+                                            echo $_SESSION['fr_date'];
+                                            unset($_SESSION['fr_date']);
+                                        }
+                                        ?>">
+                                <?php
+                                if(isset($_SESSION['e_date'])) {
+                                    echo '<div id="validationServer02" class="invalid-feedback">' . $_SESSION['e_date'] . '</div>';
+                                    unset($_SESSION['e_date']);
                                 }
-                                ?>">
+                                ?>
                             </div>
                         </div>
-                        <?php
-                        if(isset($_SESSION['e_date'])) {
-                            echo '<div class="error">' . $_SESSION['e_date'] . '</div>';
-                            unset($_SESSION['e_date']);
-                        }
-                        ?>
                         <div class="form-group row">
                             <label for="paymentMethod" class="col-sm-2 col-form-label">Sposób płatności</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="paymentMethod" name="payment-method">
+                                <select class="form-control<?php if(isset($_SESSION['e_paymentMethod']))echo ' is-invalid'?>"
+                                        id="paymentMethod"
+                                        name="payment-method"
+                                        aria-describedby="validationServer03"
+                                        required>
                                     <?php foreach ($paymentMethods as $method)
                                         echo '<option value="'.$method['id'].'">'.$method['name'].'</option>';
                                     ?>
                                 </select>
+                                <?php
+                                if(isset($_SESSION['e_paymentMethod'])) {
+                                    echo '<div id="validationServer03" class="invalid-feedback">' . $_SESSION['e_paymentMethod'] . '</div>';
+                                    unset($_SESSION['e_paymentMethod']);
+                                }
+                                ?>
                             </div>
                             <input type="hidden" id="fr_paymentMethod" value="<?php
                             if(isset($_SESSION['fr_paymentMethod']))
@@ -196,21 +220,24 @@
                                 unset($_SESSION['fr_paymentMethod']);
                             }
                             ?>">
-                            <?php
-                            if(isset($_SESSION['e_paymentMethod'])) {
-                                echo '<div class="error">' . $_SESSION['e_paymentMethod'] . '</div>';
-                                unset($_SESSION['e_paymentMethod']);
-                            }
-                            ?>
                         </div>
                         <div class="form-group row">
                             <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="category" name="category">
+                                <select class="form-control<?php if(isset($_SESSION['e_category']))echo ' is-invalid'?>"
+                                        id="category"
+                                        name="category"
+                                        aria-describedby="validationServer04">
                                     <?php foreach ($expensesCategories as $method)
                                         echo '<option value="'.($method['id']).'">'.$method['name'].'</option>';
                                     ?>
                                 </select>
+                                <?php
+                                if(isset($_SESSION['e_category'])) {
+                                    echo '<div id="validationServer04" class="invalid-feedback">' . $_SESSION['e_category'] . '</div>';
+                                    unset($_SESSION['e_category']);
+                                }
+                                ?>
                             </div>
                             <input type="hidden" id="fr_category" value="<?php
                             if(isset($_SESSION['fr_category']))
@@ -219,12 +246,6 @@
                                 unset($_SESSION['fr_category']);
                             }
                             ?>">
-                            <?php
-                            if(isset($_SESSION['e_category'])) {
-                                echo '<div class="error">' . $_SESSION['e_category'] . '</div>';
-                                unset($_SESSION['e_category']);
-                            }
-                            ?>
                         </div>
 
                         <div class="form-group">
@@ -233,7 +254,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">
-                                <a class="btn btn-outline-secondary">Anuluj</a>
+                                <a class="btn btn-outline-secondary" href="menu.php">Anuluj</a>
                                 <button type="submit" class="btn btn-primary">Dodaj</button>
                             </div>
                         </div>

@@ -30,7 +30,7 @@
                      </div>
                  </div>
                  <div class="col-6 p-2 text-right">
-                     Zalogowano jako: <strong>Jakub</strong>
+                     Zalogowano jako: <strong><?php echo $_SESSION['username']?></strong>
                  </div>
              </div>
              <div class="row">

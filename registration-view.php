@@ -37,20 +37,20 @@ session_start();
                                     </svg>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Wprowadź nazwę użytkownika" value="<?php
+                            <input type="text" class="form-control<?php if(isset($_SESSION['e_username']))echo ' is-invalid'?>" id="username" name="username" placeholder="Wprowadź nazwę użytkownika" value="<?php
                                 if(isset($_SESSION['fr_username']))
                                 {
                                     echo $_SESSION['fr_username'];
                                     unset($_SESSION['fr_username']);
                                 }
                             ?>">
-                        </div>
-                        <?php
+                            <?php
                             if(isset($_SESSION['e_username'])) {
-                                echo '<div class="error">' . $_SESSION['e_username'] . '</div>';
+                                echo '<div class="invalid-feedback">' . $_SESSION['e_username'] . '</div>';
                                 unset($_SESSION['e_username']);
                             }
-                        ?>
+                            ?>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Podaj adres email:</label>
@@ -62,20 +62,20 @@ session_start();
                                     </svg>
                                 </div>
                             </div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Wprowadź adres e-mail" value="<?php
+                            <input type="email" class="form-control<?php if(isset($_SESSION['e_email']))echo ' is-invalid'?>" id="email" name="email" placeholder="Wprowadź adres e-mail" value="<?php
                             if(isset($_SESSION['fr_email']))
                             {
                                 echo $_SESSION['fr_email'];
                                 unset($_SESSION['fr_email']);
                             }
                             ?>">
+                            <?php
+                            if(isset($_SESSION['e_email'])) {
+                                echo '<div class="invalid-feedback">' . $_SESSION['e_email'] . '</div>';
+                                unset($_SESSION['e_email']);
+                            }
+                            ?>
                         </div>
-                        <?php
-                        if(isset($_SESSION['e_email'])) {
-                            echo '<div class="error">' . $_SESSION['e_email'] . '</div>';
-                            unset($_SESSION['e_email']);
-                        }
-                        ?>
                     </div>
                     <div class="form-group">
                         <label for="password">Podaj hasło:</label>
@@ -88,20 +88,20 @@ session_start();
                                     </svg>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Podaj hasło" value="<?php
+                            <input type="password" class="form-control<?php if(isset($_SESSION['e_password']))echo ' is-invalid'?>" id="password" name="password" placeholder="Podaj hasło" value="<?php
                             if(isset($_SESSION['fr_password']))
                             {
                                 echo $_SESSION['fr_password'];
                                 unset($_SESSION['fr_password']);
                             }
                             ?>">
+                            <?php
+                            if(isset($_SESSION['e_password'])) {
+                                echo '<div class="invalid-feedback">' . $_SESSION['e_password'] . '</div>';
+                                unset($_SESSION['e_password']);
+                            }
+                            ?>
                         </div>
-                        <?php
-                        if(isset($_SESSION['e_password'])) {
-                            echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
-                            unset($_SESSION['e_password']);
-                        }
-                        ?>
                     </div>
                     <div class="form-group">
                         <label for="password">Powtórz hasło:</label>
@@ -114,7 +114,7 @@ session_start();
                                     </svg>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło" value="<?php
+                            <input type="password" class="form-control<?php if(isset($_SESSION['e_category']))echo ' is-invalid'?>" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło" value="<?php
                             if(isset($_SESSION['fr_confirm_password']))
                             {
                                 echo $_SESSION['fr_confirm_password'];
