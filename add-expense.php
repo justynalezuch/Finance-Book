@@ -72,7 +72,7 @@
             $query->bindValue(':expense_comment', $comment, PDO::PARAM_STR);
 
             if($query->execute()) {
-                $_SESSION['successfully_adding_an_expense'] = 'Gratulacje! Pomyślnie dodałeś wydatek!';
+                $_SESSION['successfully_adding_expense'] = 'Gratulacje! Pomyślnie dodałeś wydatek!';
                 header('Location: add-expense-view.php');
             } else {
                 $_SESSION['error_of_adding_expense'] = 'Coś poszło nie tak.. Spróbuj ponownie.';

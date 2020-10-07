@@ -124,9 +124,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
                     <?php
-                    if(isset($_SESSION['successfully_adding_an_expense'])) {
-                        echo '<div class="alert alert-success mt-4 mb-0 text-center" role="alert">' . $_SESSION['successfully_adding_an_expense'] . '</div>';
-                        unset($_SESSION['successfully_adding_an_expense']);
+                    if(isset($_SESSION['successfully_adding_expense'])) {
+                        echo '<div class="alert alert-success mt-4 mb-0 text-center" role="alert">' . $_SESSION['successfully_adding_expense'] . '</div>';
+                        unset($_SESSION['successfully_adding_expense']);
                     }
                     ?>
                     <?php
@@ -178,14 +178,13 @@
                                        id="date"
                                        name="date"
                                        required
-                                       aria-describedby="validationServer02"
-                                       value="<?php
+                                       aria-describedby="validationServer02" <?php
                                         if(isset($_SESSION['fr_date']))
                                         {
-                                            echo $_SESSION['fr_date'];
+                                            echo 'value="'.$_SESSION['fr_date'].'"';
                                             unset($_SESSION['fr_date']);
                                         }
-                                        ?>">
+                                        ?>>
                                 <?php
                                 if(isset($_SESSION['e_date'])) {
                                     echo '<div id="validationServer02" class="invalid-feedback">' . $_SESSION['e_date'] . '</div>';
@@ -228,8 +227,8 @@
                                         id="category"
                                         name="category"
                                         aria-describedby="validationServer04">
-                                    <?php foreach ($expensesCategories as $method)
-                                        echo '<option value="'.($method['id']).'">'.$method['name'].'</option>';
+                                    <?php foreach ($expensesCategories as $category)
+                                        echo '<option value="'.$category['id'].'">'.$category['name'].'</option>';
                                     ?>
                                 </select>
                                 <?php

@@ -55,9 +55,9 @@
                         </div>
                     </div>
                     <?php
-                    if(isset($_SESSION['e_login'])) {
-                        echo '<div class="error">' . $_SESSION['e_login'] . '</div>';
-                        unset($_SESSION['e_login']);
+                    if(isset($_SESSION['e_email'])) {
+                        echo '<div class="error">' . $_SESSION['e_email'] . '</div>';
+                        unset($_SESSION['e_email']);
                     }
                     ?>
                     <div class="text-center mt-5">

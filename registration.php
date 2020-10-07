@@ -1,5 +1,9 @@
 <?php
 session_start();
+if( isset($_SESSION['logged'])) {
+    header('Location: menu.php');
+    exit();
+}
 
 if(isset($_POST['email']))  {
     $all_right = true;

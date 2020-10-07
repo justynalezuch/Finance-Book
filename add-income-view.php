@@ -1,15 +1,24 @@
 <?php
     session_start();
-    if(!isset($_SESSION['logged'])) {
+    if(!isset($_SESSION['logged']) || !isset($_SESSION['logged_user_id'])) {
         header('Location: home.php');
         exit();
     }
 
-//    $query = $db->prepare('SELECT name FROM incomes_category_assigned_to_users WHERE user_id=:logged_user_id');
-//    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
-//    $query->execute();
-//
-//    $incomesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+    $loggedUserId = $_SESSION['logged_user_id'];
+    require_once 'connect-database.php';
+
+    $query = $db->prepare('SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id=:logged_user_id');
+    $query->bindValue(':logged_user_id', $loggedUserId, PDO::PARAM_INT);
+    $query->execute();
+
+    $incomesCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    function createSlugFromString($urlString){
+        $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $urlString);
+        return strtolower($slug);
+    }
+
 ?>
 
 <!doctype html>
@@ -123,6 +132,18 @@
         <main class="add-income pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
+                    <?php
+                    if(isset($_SESSION['successfully_adding_income'])) {
+                        echo '<div class="alert alert-success mt-4 mb-0 text-center" role="alert">' . $_SESSION['successfully_adding_income'] . '</div>';
+                        unset($_SESSION['successfully_adding_income']);
+                    }
+                    ?>
+                    <?php
+                    if(isset($_SESSION['error_of_adding_income'])) {
+                        echo '<div class="alert alert-danger mt-4 mb-0 text-center" role="alert">' . $_SESSION['error_of_adding_income'] . '</div>';
+                        unset($_SESSION['error_of_adding_income']);
+                    }
+                    ?>
                     <h1 class="py-md-5 py-4 text-center">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
@@ -131,52 +152,85 @@
                         </svg>
                         Dodaj przychód
                     </h1>
-                    <form>
+                    <form method="post" action="add-income.php">
                         <div class="form-group row">
                             <label for="amount" class="col-sm-2 col-form-label">Kwota</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="amount" placeholder="Wprowadź kwotę np. 12.45" required>
+                                <input type="number"
+                                       class="form-control <?php if(isset($_SESSION['e_amount']))echo ' is-invalid'?>"
+                                       id="amount"
+                                       name="amount"
+                                       placeholder="Wprowadź kwotę np. 12.45"
+                                       required
+                                       value="<?php
+                                        if(isset($_SESSION['fr_amount']))
+                                        {
+                                            echo $_SESSION['fr_amount'];
+                                            unset($_SESSION['fr_amount']);
+                                        }
+                                ?>">
+                                <?php
+                                    if(isset($_SESSION['e_amount'])) {
+                                    echo '<div id="validationServer01" class="invalid-feedback">' . $_SESSION['e_amount'] . '</div>';
+                                    unset($_SESSION['e_amount']);
+                                    }
+                                ?>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Data</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="date" required>
+                                <input type="date"
+                                       class="form-control<?php if(isset($_SESSION['e_date']))echo ' is-invalid'?>"
+                                       id="date"
+                                       name="date"
+                                       required <?php
+                                       if(isset($_SESSION['fr_date']))
+                                       {
+                                           echo 'value="'.$_SESSION['fr_date'].'"';
+                                           unset($_SESSION['fr_date']);
+                                       }
+                                       ?>>
+                                <?php
+                                if(isset($_SESSION['e_date'])) {
+                                    echo '<div class="invalid-feedback">' . $_SESSION['e_date'] . '</div>';
+                                    unset($_SESSION['e_date']);
+                                }
+                                ?>
                             </div>
                         </div>
                         <fieldset class="form-group">
                             <legend class="col-form-label">Kategoria</legend>
                             <div class="pt-1">
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="salary" value="salary" checked>
-                                        <label class="form-check-label" for="salary">
-                                            Wynagrodzenie
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="bankInterest" value="bank-interest">
-                                        <label class="form-check-label" for="bankInterest">
-                                            Odsetki bankowe
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="allegroSales" value="allegro-sales">
-                                        <label class="form-check-label" for="allegroSales">
-                                            Sprzedaź na allegro
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="radio" name="category" id="others" value="option3">
-                                        <label class="form-check-label" for="others">
-                                            Inne
-                                        </label>
-                                    </div>
-
-                                </div>
+                                <?php foreach ($incomesCategories as $category)
+                                    echo
+                                    '<div class="form-check my-2">
+                                        <input class="form-check-input" 
+                                            type="radio" 
+                                            name="category" 
+                                            id="'.createSlugFromString($category['name']).'"
+                                            value="'.($category['id']).'">
+                                        <label class="form-check-label" for="'.createSlugFromString($category['name']).'">'.$category['name'].'</label>
+                                    </div>';
+                                ?>
+                            </div>
                         </fieldset>
+                        <?php
+                        if(isset($_SESSION['e_category'])) {
+                            echo '<div class="error text-center mb-2">' . $_SESSION['e_category'] . '</div>';
+                            unset($_SESSION['e_category']);
+                        }
+                        ?>
+                        <input type="hidden" id="fr_income_category" value="<?php
+                        if(isset($_SESSION['fr_income_category']))
+                        {
+                            echo $_SESSION['fr_income_category'];
+                            unset($_SESSION['fr_income_category']);
+                        }
+                        ?>">
                         <div class="form-group">
                             <label for="comment">Komentarz</label>
-                            <textarea class="form-control" id="comment" rows="4" placeholder="Dodaj komentarz (opcjonalnie)"></textarea>
+                            <textarea class="form-control <?php if(isset($_SESSION['e_amount']))echo ' is-invalid'?>" id="comment" rows="4" placeholder="Dodaj komentarz (opcjonalnie)"></textarea>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">

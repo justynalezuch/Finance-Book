@@ -23,12 +23,12 @@
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
 
-            unset ($_SESSION['e_login']);
+            unset ($_SESSION['e_email']);
             header('Location: menu.php');
         }
         else
         {
-            $_SESSION['e_login'] = 'Nieprawidłowy login lub hasło!';
+            $_SESSION['e_email'] = 'Nieprawidłowy email lub hasło!';
             header('Location: login-view.php');
         }
     }
