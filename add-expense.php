@@ -8,7 +8,7 @@
 
     if(isset($_POST['amount']) && $_SESSION['logged_user_id']){
 
-        $all_right = true;
+        $successful_validation = true;
         $loggedID = $_SESSION['logged_user_id'];
 
         $amount = filter_input(INPUT_POST, 'amount');
@@ -25,25 +25,25 @@
         $_SESSION['fr_comment'] = $comment;
 
         if(!preg_match("/^\d{1,8}(\.\d{0,2})?$/" , $amount)) {
-            $all_right = false;
+            $successful_validation = false;
             $_SESSION['e_amount'] = "Podaj poprawną wartość - maksymalnie 10 cyfr w tym 2 po przecinku.";
             header('Location: add-expense-view.php');
         }
 
         if(!preg_match("/^\d{4}-\d{2}-\d{2}$/" , $dateOfExpense)) {
-            $all_right = false;
+            $successful_validation = false;
             $_SESSION['e_date'] = "Podaj poprawną datę.";
             header('Location: add-expense-view.php');
         }
 
         if(empty($paymentMethod)) {
-            $all_right = false;
+            $successful_validation = false;
             $_SESSION['e_paymentMethod'] = "Podaj metodę płatności.";
             header('Location: add-expense-view.php');
         }
 
         if(empty($category)) {
-            $all_right = false;
+            $successful_validation = false;
             $_SESSION['e_category'] = "Podaj kategorię wydatku.";
             header('Location: add-expense-view.php');
         }
@@ -51,7 +51,7 @@
             $comment = NULL;
         }
 
-        if($all_right == true) {
+        if($successful_validation == true) {
             require_once 'connect-database.php';
 
             $query = $db->prepare(
