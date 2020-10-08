@@ -117,6 +117,9 @@ header .navbar-expand-lg .navbar-nav .nav-link {
 .balance p.summary {
   font-size: 36px;
 }
+.balance .dropdown-item.active {
+  background-color: #68839e;
+}
 
 .add-income h1, .add-expense h1 {
   font-size: 1.7rem;
@@ -160,6 +163,7 @@ blockquote p {
 
 .add-income legend {
   background: #f2f6fa;
+  border: 1px solid #ced4da;
   border-radius: 5px;
   width: 50%;
 }
