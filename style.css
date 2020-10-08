@@ -118,7 +118,10 @@ header .navbar-expand-lg .navbar-nav .nav-link {
   font-size: 36px;
 }
 .balance .dropdown-item.active {
-  background-color: #68839e;
+  background-color: #e28422;
+}
+.balance .dropdown-item.active:hover {
+  background-color: #a7571a;
 }
 
 .add-income h1, .add-expense h1 {

@@ -6,6 +6,15 @@
     }
 
     $currentURL = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+
+    if(isset( $_SESSION['period'])) echo $_SESSION['period'];
+
+    $periodsNames = [
+            'current-month' => 'Bieżący miesiąc',
+            'last-month' => 'Poprzedni miesiąc',
+            'current-year' => 'Bieżący rok',
+            'unstandardized' => 'Niestandardowy',
+    ];
     ?>
 <!doctype html>
 <html lang="pl">
@@ -129,13 +138,17 @@
                 <div class="col-md-6 text-right pt-2">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="financial-balance.php?period=current-month" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bieżący miesiąc
+                            <?php if(isset($_SESSION['period']) && isset($periodsNames[$_SESSION['period']])) echo $periodsNames[$_SESSION['period']]; else echo 'Bieżący miesiąc'?>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item active" href="financial-balance.php?period=current-month">Bieżący miesiąc</a>
-                            <a class="dropdown-item" href="financial-balance.php?period=last-month">Poprzedni miesiąc</a>
-                            <a class="dropdown-item" href="financial-balance.php?period=current-year">Bieżący rok</a>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#nonStandardPeriod">Niestandardowy</a>
+                            <a class="dropdown-item <?php if(!isset($_SESSION['period']) || (isset($_SESSION['period']) && $_SESSION['period'] == 'current-month')) echo 'active' ?>"
+                               href="financial-balance.php?period=current-month">Bieżący miesiąc</a>
+                            <a class="dropdown-item <?php if(isset($_SESSION['period']) && $_SESSION['period'] == 'last-month') echo 'active' ?>"
+                               href="financial-balance.php?period=last-month">Poprzedni miesiąc</a>
+                            <a class="dropdown-item <?php if(isset($_SESSION['period']) && $_SESSION['period'] == 'current-year') echo 'active' ?>"
+                               href="financial-balance.php?period=current-year">Bieżący rok</a>
+                            <a class="dropdown-item <?php if(isset($_SESSION['period']) && $_SESSION['period'] == 'unstandardized') echo 'active' ?>"
+                               data-toggle="modal" data-target="#unstandardizedPeriod" href="#">Niestandardowy</a>
                         </div>
                     </div>
                 </div>
@@ -294,11 +307,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="nonStandardPeriod" tabindex="-1" aria-labelledby="nonStandardPeriodLabel" aria-hidden="true">
+    <div class="modal fade" id="unstandardizedPeriod" tabindex="-1" aria-labelledby="unstandardizedPeriodLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="nonStandardPeriodLabel">Wybierz zakres dat</h5>
+                    <h5 class="modal-title" id="unstandardizedPeriodLabel">Wybierz zakres dat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
