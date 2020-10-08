@@ -23,7 +23,6 @@ $(document).ready(function () {
 
     // Add expense, add income - if isset date - remember it
     if(document.getElementById('date') != null) {
-        console.log(document.getElementById('date').value);
         if (document.getElementById('date').value != '') {
             $('input#date').val(document.getElementById('date').value);
         } else {
@@ -42,6 +41,22 @@ $(document).ready(function () {
             $('input#date').val(`${currentYear}-${currentMonth}-${currentDay}`);
         }
     }
+
+    // --------- FINANCIAL BALANCE ---------
+
+    if(document.getElementById('startDate') != null) {
+        console.log(document.getElementById('startDate').value);
+        if (document.getElementById('startDate').value != '') {
+            $('input#date').val(document.getElementById('startDate').value);
+        }
+    }
+    if(document.getElementById('endDate') != null) {
+        console.log(document.getElementById('endDate').value);
+        if (document.getElementById('endDate').value != '') {
+            $('input#date').val(document.getElementById('endDate').value);
+        }
+    }
+
 
     if (typeof google !== 'undefined') {
         // --- Load google charts ---

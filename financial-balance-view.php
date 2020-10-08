@@ -7,13 +7,11 @@
 
     $currentURL = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
-    if(isset( $_SESSION['period'])) echo $_SESSION['period'];
-
-    $periodsNames = [
-            'current-month' => 'Bieżący miesiąc',
-            'last-month' => 'Poprzedni miesiąc',
-            'current-year' => 'Bieżący rok',
-            'unstandardized' => 'Niestandardowy',
+    $periodsTranslations = [
+        'current-month' => 'Bieżący miesiąc',
+        'last-month' => 'Poprzedni miesiąc',
+        'current-year' => 'Bieżący rok',
+        'unstandardized' => 'Niestandardowy',
     ];
     ?>
 <!doctype html>
@@ -109,7 +107,6 @@
                                      </a>
                                  </li>
                              </ul>
-
                              <!--                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
                              <!--                        <li class="nav-item active">-->
                              <!--                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
@@ -133,12 +130,22 @@
                             <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"></path>
                         </svg>
                         Finansowy bilans</h1>
-                    <p class="text-secondary">Okres: <strong>bieżący miesiąc</strong></p>
+                    <p class="text-secondary">Okres:&nbsp;<strong><?php
+                            if(!isset($_SESSION['period']))
+                                echo 'Bieżący miesiąc';
+                            elseif ($_SESSION['period'] == 'unstandardized')
+                                echo 'od:&nbsp;<span>'.$_SESSION['start_date'] .'</span>&nbsp;do:<span> '. $_SESSION['end_date'].'</span>';
+                            else
+                                echo $periodsTranslations[$_SESSION['period']];
+                            unset($_SESSION['period']);
+                            ?>
+                        </strong>
+                    </p>
                 </div>
                 <div class="col-md-6 text-right pt-2">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="financial-balance.php?period=current-month" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php if(isset($_SESSION['period']) && isset($periodsNames[$_SESSION['period']])) echo $periodsNames[$_SESSION['period']]; else echo 'Bieżący miesiąc'?>
+                            <?php if(isset($_SESSION['period']) && isset($periodsTranslations[$_SESSION['period']])) echo $periodsTranslations[$_SESSION['period']]; else echo 'Bieżący miesiąc'?>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item <?php if(!isset($_SESSION['period']) || (isset($_SESSION['period']) && $_SESSION['period'] == 'current-month')) echo 'active' ?>"
@@ -318,14 +325,35 @@
                 </div>
                 <form method="post" action="financial-balance.php">
                     <div class="modal-body">
+                        <?php
+                        if(isset($_SESSION['e_period']))
+                        {
+                            echo '<div class="alert alert-danger mb-4 text-center">'.$_SESSION['e_period'].'</div>';
+                            unset($_SESSION['e_period']);
+                        }
+                        ?>
                         <form method="post" action="financial-balance.php">
                             <div class="form-group">
                                 <label for="start-date">Data początkowa</label>
-                                <input class="form-control" type="date" name="start-date" id="start-date">
+                                <input class="form-control" type="date" name="start-date" id="startDate"
+                                    <?php
+                                    if(isset($_SESSION['start_date']))
+                                    {
+                                        echo 'value="'.$_SESSION['start_date'].'"';
+                                        unset($_SESSION['start_date']);
+                                    }
+                                    ?>>
                             </div>
                             <div class="form-group">
                                 <label for="end-date">Data końcowa</label>
-                                <input class="form-control" type="date" name="end-date" id="end-date">
+                                <input class="form-control" type="date" name="end-date" id="endDate"
+                                    <?php
+                                    if(isset($_SESSION['end_date']))
+                                    {
+                                        echo 'value="'.$_SESSION['end_date'].'"';
+                                        unset($_SESSION['end_date']);
+                                    }
+                                    ?>>
                             </div>
                     </div>
                     <div class="modal-footer">

@@ -23,13 +23,23 @@ if(isset($_GET['period'])) {
             break;
     }
 }
+elseif ($_POST['start-date'] != '' && $_POST['end-date'] != '') {
 
-if(isset($_POST['start-date'])) {
     $_SESSION['period'] = 'unstandardized';
+    $_SESSION['start_date'] = $_POST['start-date'];
+    $_SESSION['end_date'] = $_POST['end-date'];
 
-//    echo $_POST['start-date'];
-    echo $_POST['end-date'] > $_POST['start-date'];
+    if($_POST['end-date'] < $_POST['start-date']) {
+        $_SESSION['e_period'] = 'Pierwsza data musi być wcześniejsza lub równa drugiej.';
+        header('Location: financial-balance-view.php');
+    }
 
+} else {
+    $_POST['start-date'] != '' ? $_SESSION['start_date'] = $_POST['start-date'] : '';
+    $_POST['end-date'] != '' ?  $_SESSION['end_date'] = $_POST['end-date'] : '';
+
+    $_SESSION['e_period'] = 'Podaj datę początkową oraz końcową.';
+    header('Location: financial-balance-view.php');
 }
 
 header('Location: financial-balance-view.php');

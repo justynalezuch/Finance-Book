@@ -123,6 +123,9 @@ header .navbar-expand-lg .navbar-nav .nav-link {
 .balance .dropdown-item.active:hover {
   background-color: #a7571a;
 }
+.balance .text-secondary span {
+  color: #000;
+}
 
 .add-income h1, .add-expense h1 {
   font-size: 1.7rem;
