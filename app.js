@@ -57,6 +57,9 @@ $(document).ready(function () {
         }
     }
 
+    if(document.getElementById('periodError') != null){
+        $('#unstandardizedPeriod').modal('show');
+    }
 
     if (typeof google !== 'undefined') {
         // --- Load google charts ---
@@ -94,5 +97,12 @@ $(document).ready(function () {
             chart.draw(data, options);
         }
     }
+
 });
 
+// Passing data - test
+// var oReq = new XMLHttpRequest();
+// oReq.onload = function() {
+// };
+// oReq.open("get", "financial-balance-data.php", true);
+// oReq.send();

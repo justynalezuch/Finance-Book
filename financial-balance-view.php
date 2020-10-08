@@ -328,7 +328,7 @@
                         <?php
                         if(isset($_SESSION['e_period']))
                         {
-                            echo '<div class="alert alert-danger mb-4 text-center">'.$_SESSION['e_period'].'</div>';
+                            echo '<div class="alert alert-danger mb-4 text-center" id="periodError">'.$_SESSION['e_period'].'</div>';
                             unset($_SESSION['e_period']);
                         }
                         ?>
@@ -368,7 +368,5 @@
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="app.js"></script>
-    <script>
-    </script>
 </body>
 </html>

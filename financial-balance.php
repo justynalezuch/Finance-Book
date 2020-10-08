@@ -44,3 +44,4 @@ elseif ($_POST['start-date'] != '' && $_POST['end-date'] != '') {
 
 header('Location: financial-balance-view.php');
 
+
