@@ -129,7 +129,7 @@
                             <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"></path>
                             <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"></path>
                         </svg>
-                        Finansowy bilans</h1>
+                        Finansowy bilans <?php echo $_SESSION['test1']?></h1>
                     <p class="text-secondary">Okres:&nbsp;<strong><?php
                             if(!isset($_SESSION['period']))
                                 echo 'Bieżący miesiąc';
@@ -326,10 +326,10 @@
                 <form method="post" action="financial-balance.php">
                     <div class="modal-body">
                         <?php
-                        if(isset($_SESSION['e_period']))
+                        if(isset($_SESSION['error_period']))
                         {
-                            echo '<div class="alert alert-danger mb-4 text-center" id="periodError">'.$_SESSION['e_period'].'</div>';
-                            unset($_SESSION['e_period']);
+                            echo '<div class="alert alert-danger mb-4 text-center" id="periodError">'.$_SESSION['error_period'].'</div>';
+                            unset($_SESSION['error_period']);
                         }
                         ?>
                         <form method="post" action="financial-balance.php">
@@ -368,5 +368,8 @@
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="app.js"></script>
+    <script>
+        <?php echo $_SESSION['period']; ?>
+    </script>
 </body>
 </html>
