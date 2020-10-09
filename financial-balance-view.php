@@ -137,7 +137,6 @@
                                 echo 'od:&nbsp;<span>'.$_SESSION['start_date'] .'</span>&nbsp;do:<span> '. $_SESSION['end_date'].'</span>';
                             else
                                 echo $periodsTranslations[$_SESSION['period']];
-                            unset($_SESSION['period']);
                             ?>
                         </strong>
                     </p>
@@ -157,6 +156,7 @@
                             <a class="dropdown-item <?php if(isset($_SESSION['period']) && $_SESSION['period'] == 'unstandardized') echo 'active' ?>"
                                data-toggle="modal" data-target="#unstandardizedPeriod" href="#">Niestandardowy</a>
                         </div>
+<!--                        --><?php //unset($_SESSION['period']) ?>
                     </div>
                 </div>
             </div>
@@ -340,7 +340,7 @@
                                     if(isset($_SESSION['start_date']))
                                     {
                                         echo 'value="'.$_SESSION['start_date'].'"';
-                                        unset($_SESSION['start_date']);
+//                                        unset($_SESSION['start_date']);
                                     }
                                     ?>>
                             </div>
@@ -351,7 +351,7 @@
                                     if(isset($_SESSION['end_date']))
                                     {
                                         echo 'value="'.$_SESSION['end_date'].'"';
-                                        unset($_SESSION['end_date']);
+//                                        unset($_SESSION['end_date']);
                                     }
                                     ?>>
                             </div>
