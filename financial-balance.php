@@ -53,7 +53,9 @@ elseif ($_POST['start-date'] != '' && $_POST['end-date'] != '') {
         $secondDate = $_POST['end-date'];
     }
 
-} else {
+}
+// Wrong data
+else {
     $_POST['start-date'] != '' ? $_SESSION['start_date'] = $_POST['start-date'] : '';
     $_POST['end-date'] != '' ?  $_SESSION['end_date'] = $_POST['end-date'] : '';
 
@@ -65,12 +67,14 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
 
     require_once 'connect-database.php';
 
+    // Expenses
     $sql = 'SELECT sum(amount), expenses_category_assigned_to_users.name AS category_name 
             FROM expenses 
             INNER JOIN expenses_category_assigned_to_users on expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id 
             WHERE (expenses.user_id = :user_id AND date_of_expense >= :first_date AND date_of_expense <= :second_date)
             GROUP BY expenses.expense_category_assigned_to_user_id 
-            ORDER BY sum(amount) DESC;';
+            ORDER BY sum(amount) DESC;
+            ';
 
     $query = $db->prepare($sql);
     $query->bindValue(':user_id', $_SESSION['logged_user_id'], PDO::PARAM_INT);
@@ -79,13 +83,52 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
 
     if($query->execute()) {
         $expenses = $query->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($expenses);
-
-        exit();
+        if(!empty($expenses)) {
+            $_SESSION['expenses'] = $expenses;
+        }
+        header('Location: financial-balance-view.php');
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
         header('Location: financial-balance-view.php');
     }
+
+    // Incomes
+    $sql = 'SELECT sum(amount), incomes_category_assigned_to_users.name AS category_name 
+            FROM incomes 
+            INNER JOIN incomes_category_assigned_to_users on incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id 
+            WHERE (incomes.user_id = :user_id AND date_of_income >= :first_date AND date_of_income <= :second_date)
+            GROUP BY incomes.income_category_assigned_to_user_id 
+            ORDER BY sum(amount) DESC;';
+
+    $query = $db->prepare($sql);
+    $query->bindValue(':user_id', $_SESSION['logged_user_id'], PDO::PARAM_INT);
+    $query->bindValue(':first_date', $firstDate, PDO::PARAM_STR);
+    $query->bindValue(':second_date', $secondDate, PDO::PARAM_STR);
+
+    if($query->execute()) {
+        $incomes = $query->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($incomes)) {
+            $_SESSION['incomes'] = $incomes;
+        }
+        header('Location: financial-balance-view.php');
+    } else {
+        $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
+        header('Location: financial-balance-view.php');
+    }
+
+
+
+//    $sql = 'SELECT sum(amount)
+//            FROM expenses
+//            WHERE (user_id = 2 AND date_of_expense >= :first_date AND date_of_expense <= :second_date)';
+//
+//    $query = $db->prepare($sql);
+////    $query->bindValue(':user_id', $_SESSION['logged_user_id'], PDO::PARAM_INT);
+//    $query->bindValue(':first_date', $firstDate, PDO::PARAM_STR);
+//    $query->bindValue(':second_date', $secondDate, PDO::PARAM_STR);
+//    $query->execute();
+//    var_dump($query->fetch(PDO::FETCH_ASSOC));
+//    exit();
 
     // todo: select incomes,
     // display in table view,

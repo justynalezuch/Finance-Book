@@ -129,7 +129,8 @@
                             <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"></path>
                             <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"></path>
                         </svg>
-                        Finansowy bilans <?php echo $_SESSION['test1']?></h1>
+                        Finansowy bilans
+                    </h1>
                     <p class="text-secondary">Okres:&nbsp;<strong><?php
                             if(!isset($_SESSION['period']))
                                 echo 'Bieżący miesiąc';
@@ -173,26 +174,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Wynagrodzenie</td>
-                            <td>2424.45</td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Odsetki bankowe</td>
-                            <td>522.43</td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Sprzedaż na allegro</td>
-                            <td>123.01</td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Inne</td>
-                            <td>123.00</td>
-                        </tr>
+                        <?php
+                        if(isset($_SESSION['incomes'])) {
+                            foreach ($_SESSION['incomes'] as $key => $icome)
+                                echo
+                                    '<tr>
+                                <td>' . ++$key . '.</td>
+                                <td>' . $icome['category_name'] . '</td>
+                                <td>' . $icome['sum(amount)'] . '</td>
+                            </tr>';
+
+                            unset($_SESSION['incomes']);
+                        } else {
+                            echo
+                            '<tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <div class="alert alert-danger text-center">Brak przychodów w podanym okresie.</div>';
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -209,93 +211,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Jedzenie</td>
-                            <td>1540.12</td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Mieszkanie</td>
-                            <td>1125.12</td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Transport</td>
-                            <td>65.12</td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Telekomunikacja</td>
-                            <td>63.12</td>
-                        </tr>
-                        <tr>
-                            <td>5.</td>
-                            <td>Opieka zdrowotna</td>
-                            <td>55.12</td>
-                        </tr>
-                        <tr>
-                            <td>6.</td>
-                            <td>Ubranie</td>
-                            <td>52.12</td>
-                        </tr>
-                        <tr>
-                            <td>7.</td>
-                            <td>Higiena</td>
-                            <td>45.12</td>
-                        </tr>
-                        <tr>
-                            <td>8.</td>
-                            <td>Dzieci</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>9.</td>
-                            <td>Rozrywka</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>10.</td>
-                            <td>Wycieczka</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>11.</td>
-                            <td>Szkolenia</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>12.</td>
-                            <td>Książki</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>13.</td>
-                            <td>Oszczędności</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>14.</td>
-                            <td>Naotą jesień, czyli emeryturę</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>15.</td>
-                            <td>Spłata długów</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>16.</td>
-                            <td>Darowizna</td>
-                            <td>54.12</td>
-                        </tr>
-                        <tr>
-                            <td>17.</td>
-                            <td>Inne wydatki</td>
-                            <td>54.12</td>
-                        </tr>
+                        <?php
+                        if(isset($_SESSION['expenses'])) {
+                            foreach ($_SESSION['expenses'] as $key => $expense)
+                                echo
+                                    '<tr>
+                                <td>' . ++$key . '.</td>
+                                <td>' . $expense['category_name'] . '</td>
+                                <td>' . $expense['sum(amount)'] . '</td>
+                            </tr>';
+
+                            unset($_SESSION['expenses']);
+                        } else {
+                            echo
+                                '<tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <div class="alert alert-danger text-center">Brak wydatków w podanym okresie.</div>';
+                        }
+                        ?>
                         </tbody>
                     </table>
+
                 </div>
             </div>
             <div class="row justify-content-center border-bottom">
