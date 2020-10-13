@@ -243,10 +243,25 @@
             <div class="row justify-content-center py-4">
                 <div class="col-md-6 text-center">
                     <h2>Twój finasowy bilans:</h2>
-                    <p class="text-success summary">245&nbsp;PLN</p>
-                    <p class="text-success">
-                        Gratulacje! Świetnie zarządzasz finansami!
-                    </p>
+                    <?php
+                    if(isset($_SESSION['financial_balance']))
+                    {
+                        if($_SESSION['financial_balance'] >= 0)
+                            echo ' <p class="text-success summary mb-0">'.$_SESSION['financial_balance'].'&nbsp;PLN</p>
+                                    <p class="text-success">
+                                        Gratulacje! Świetnie zarządzasz finansami!
+                                    </p>';
+                        else
+                            echo ' <p class="text-danger summary mb-0">'.$_SESSION['financial_balance'].'&nbsp;PLN</p>
+                                     <p class="text-danger">
+                                        Zwiększ swoje przychody lub pomniejsz wydatki.
+                                    </p>';
+                        unset($_SESSION['financial_balance']);
+                    }
+                    ?>
+
+
+
                 </div>
             </div>
         </main>
