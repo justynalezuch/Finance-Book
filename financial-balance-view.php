@@ -17,7 +17,10 @@
     // Current month financial balance
     if(!isset($_SESSION['period']))
         require_once 'default-financial-balance.php';
+
+    if(isset($_SESSION['expenses'])) $expenses = $_SESSION['expenses'];
     ?>
+
 <!doctype html>
 <html lang="pl">
 <head>
@@ -179,7 +182,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        if(isset($_SESSION['incomes'])) {
+                        if(!empty($_SESSION['incomes'])) {
                             foreach ($_SESSION['incomes'] as $key => $icome)
                                 echo
                                     '<tr>
@@ -216,7 +219,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        if(isset($_SESSION['expenses'])) {
+                        if(!empty($_SESSION['expenses'])) {
                             foreach ($_SESSION['expenses'] as $key => $expense)
                                 echo
                                     '<tr>
@@ -260,7 +263,7 @@
                         else
                             echo ' <p class="text-danger summary mb-0">'.$_SESSION['financial_balance_summary'].'&nbsp;PLN</p>
                                      <p class="text-danger">
-                                        Zwiększ swoje przychody lub pomniejsz wydatki.
+                                        Powiększ swoje przychody lub pomniejsz wydatki.
                                     </p>';
                         unset($_SESSION['financial_balance_summary']);
                     }
@@ -329,7 +332,36 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="app.js"></script>
     <script>
-        <?php echo $_SESSION['period']; ?>
+        if (typeof google !== 'undefined') {
+            // --- Load google charts ---
+            google.charts.load('current', {'packages': ['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                let expenses = <?php echo json_encode($expenses)?>;
+                let category = [];
+                let sum = [];
+
+                for (let n = 0; n < expenses.length; n++) {
+                    sum.push(parseFloat(expenses[n]['sum(amount)']));
+                    category.push(expenses[n]['category_name']);
+                }
+                if(expenses.length > 0) {
+
+                    let data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Kategoria');
+                    data.addColumn('number', 'Wydatek');
+
+                    for (i = 0; i < category.length; i++)
+                        data.addRow([category[i], sum[i]]);
+
+                    let options = {'title': '', 'width': 520, 'height': 400};
+                    let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            }
+        }
+
     </script>
 </body>
 </html>

@@ -20,9 +20,9 @@ require_once 'connect-database.php';
 
     if($query->execute()) {
         $expenses = $query->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty($expenses)) {
+//        if(!empty($expenses)) {
             $_SESSION['expenses'] = $expenses;
-        }
+//        }
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
     }

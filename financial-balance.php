@@ -83,9 +83,9 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
 
     if($query->execute()) {
         $expenses = $query->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty($expenses)) {
+//        if(!empty($expenses)) {
             $_SESSION['expenses'] = $expenses;
-        }
+//        }
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
     }
@@ -105,9 +105,9 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
 
     if($query->execute()) {
         $incomes = $query->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty($incomes)) {
+//        if(!empty($incomes)) {
             $_SESSION['incomes'] = $incomes;
-        }
+//        }
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
     }
