@@ -13,6 +13,10 @@
         'current-year' => 'Bieżący rok',
         'unstandardized' => 'Niestandardowy',
     ];
+
+    // Current month financial balance
+    if(!isset($_SESSION['period']))
+        require_once 'default-financial-balance.php';
     ?>
 <!doctype html>
 <html lang="pl">
@@ -244,19 +248,21 @@
                 <div class="col-md-6 text-center">
                     <h2>Twój finasowy bilans:</h2>
                     <?php
-                    if(isset($_SESSION['financial_balance']))
+                    if(isset($_SESSION['financial_balance_summary']))
                     {
-                        if($_SESSION['financial_balance'] >= 0)
-                            echo ' <p class="text-success summary mb-0">'.$_SESSION['financial_balance'].'&nbsp;PLN</p>
+                        if($_SESSION['financial_balance_summary'] > 0)
+                            echo ' <p class="text-success summary mb-0">'.$_SESSION['financial_balance_summary'].'&nbsp;PLN</p>
                                     <p class="text-success">
                                         Gratulacje! Świetnie zarządzasz finansami!
                                     </p>';
+                        else if($_SESSION['financial_balance_summary'] == 0)
+                            echo ' <p class="text-secondary summary mb-0">'.$_SESSION['financial_balance_summary'].'&nbsp;PLN</p>';
                         else
-                            echo ' <p class="text-danger summary mb-0">'.$_SESSION['financial_balance'].'&nbsp;PLN</p>
+                            echo ' <p class="text-danger summary mb-0">'.$_SESSION['financial_balance_summary'].'&nbsp;PLN</p>
                                      <p class="text-danger">
                                         Zwiększ swoje przychody lub pomniejsz wydatki.
                                     </p>';
-                        unset($_SESSION['financial_balance']);
+                        unset($_SESSION['financial_balance_summary']);
                     }
                     ?>
 

@@ -86,10 +86,8 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
         if(!empty($expenses)) {
             $_SESSION['expenses'] = $expenses;
         }
-        header('Location: financial-balance-view.php');
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
-        header('Location: financial-balance-view.php');
     }
 
     // Incomes
@@ -110,12 +108,10 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
         if(!empty($incomes)) {
             $_SESSION['incomes'] = $incomes;
         }
-        header('Location: financial-balance-view.php');
     } else {
         $_SESSION['error_financial_balance'] = 'Coś poszło nie tak.. Spróbuj ponownie.';
-        header('Location: financial-balance-view.php');
     }
-    // Financial balance
+    // Financial balance - summary
     $sql = 'SELECT sum(amount)
             FROM expenses
             WHERE (user_id = :user_id AND date_of_expense >= :first_date AND date_of_expense <= :second_date)';
@@ -141,7 +137,9 @@ if($successful_validation == true && isset($firstDate) && isset($secondDate)) {
         $sumOfIncomes = (int)$query->fetch(PDO::FETCH_ASSOC)['sum(amount)'];
     }
 
-    $_SESSION['financial_balance'] =  $sumOfIncomes - $sumOfExpenses;
+    $_SESSION['financial_balance_summary'] =  $sumOfIncomes - $sumOfExpenses;
+    header('Location: financial-balance-view.php');
+
 
     // todo: google pie chart
 
