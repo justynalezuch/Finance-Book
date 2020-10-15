@@ -57,6 +57,7 @@
                     <?php
                     if(isset($_SESSION['e_email'])) {
                         echo '<div class="error">' . $_SESSION['e_email'] . '</div>';
+                        echo '<p class="mb-0">Nie posiadasz konta? <a href="registration-view.php">Zarejestruj się</a></p>';
                         unset($_SESSION['e_email']);
                     }
                     ?>

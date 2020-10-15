@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['successful_registration'])) {
-        header('Location: home.php');
+        header('Location: index.php');
     } else {
         unset($_SESSION['successful_registration']);
     }
